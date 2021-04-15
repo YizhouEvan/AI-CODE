@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define bool int
+#define false 0
+#define true 1
+struct Data{
+	double x;
+	double y;
+};
+struct Data data[50];
+int dataNum;
+double a,b;
+double sumXY;
+double sumX;
+double sumY;
+double sumXX;
+
+bool Inputs();
+
+void Init();
+
+void LineReg();
+
+void Outputs();
+
+int main(){
+	if(Inputs()==false){
+		return 0;
+	}
+	Init();
+	LineReg();
+	Outputs();
+	system("pause");
+	return 0;
+}
+
+bool Inputs(){
+	char fname[256];
+	printf("请输入存放数据的文件名：");
+	scanf("%s",fname);
+	printf("\n样本数目：\n");
+	scanf("%d",&dataNum);
+	FILE*fp=fopen(fname,"rb");
+	if(fp==NULL){
+		printf("不能打开输入的文件\n");
+		return false;
+	}
+	for(int i=0;i<dataNum;i++){
+		fscanf(fp,"%if,%lf",&data[i].x,&data[i].y);
+	}
+	fclose(fp);
+	return true;
+}
+
+void Init(){
+	a=b=sumXY=sumX=sumY=sumXX=0;
+}
+
+void LineReg(){
+	for(int i=0;i<dataNum;i++){
+		sumXY+=data[i].x*data[i].y;
+		sumX+=data[i].x;
+		sumY+=data[i].y;
+		sumXX+=data[i].x*data[i].x;
+	}
+	b=(sumXY*dataNum-sumX*sumY)/(sumXX*dataNum-sumX*sumX);
+	a=sumY/dataNum-b*sumX/dataNum;
+	printf("Y=%.lfX+%.2lf\n",b,a);
+}
+
+void Outputs(){
+	double x;
+	double y;
+	printf("请输入房屋的面积（单位：平方米）：");
+	scanf("%lf",&x);
+	y=a+b*x;
+	printf("预计房价为：%.2lf元\n",y);
+}
