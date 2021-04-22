@@ -1,1 +1,19 @@
 #include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<math.h>
+#define Data 380
+#define TestData 126
+#define In 13
+#define Out 1
+#define Neuron 40
+#define TrainC 40000
+#define WAlta 0.1
+#define VAlta 0.2
+double d_in[Data][In];
+double d_out[Data][Out];
+double t_in[TestData][In];
+double t_out[TestData][Out];
+double pre[TextData][Out];
+double v[Neuron][In];
+double y[Ne
