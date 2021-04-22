@@ -16,4 +16,12 @@ double t_in[TestData][In];
 double t_out[TestData][Out];
 double pre[TextData][Out];
 double v[Neuron][In];
-double y[Ne
+double y[Neuron];
+double w[Out][Neuron];
+double Maxin[In],Minin[In];
+double Maxout[Out],Minout[Out];
+double OutputData[Out];
+double dw[Out][Neuron],dv[Neuron];
+double mse;
+double rmse;
+
